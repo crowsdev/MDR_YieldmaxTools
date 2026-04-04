@@ -1,0 +1,4 @@
+﻿TODO:
+	-	Timestamp columns formatted to show date only.
+	-	Build columns for grid in holdings tab instead of using datasource.
+

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="mdr" Class="dbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=nothingsussindustries.duckdns.org;Initial Catalog=mdr;User ID=xxx;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" SettingsObjectName="MDR_YieldmaxTools.Properties.Settings" SettingsPropertyName="mdrConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.HistoricalDividendData" Member="HistoricalDividendDatas">
+    <Type Name="HistoricalDividendData">
+      <Column Name="symbol" Type="System.String" DbType="VarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="timestamp" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="dividend" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="yf1_profile_HistoricalDividendData" Member="yf1_profile" ThisKey="symbol" OtherKey="symbol" Type="yf1_profile" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HistoricalDividendDataAdjustedToWeekly" Member="HistoricalDividendDataAdjustedToWeeklies">
+    <Type Name="HistoricalDividendDataAdjustedToWeekly">
+      <Column Name="symbol" Type="System.String" DbType="VarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="timestamp" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="dividend" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="yf1_profile_HistoricalDividendDataAdjustedToWeekly" Member="yf1_profile" ThisKey="symbol" OtherKey="symbol" Type="yf1_profile" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HistoricalTickData1D" Member="HistoricalTickData1Ds">
+    <Type Name="HistoricalTickData1D">
+      <Column Name="symbol" Type="System.String" DbType="VarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="timestamp" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[open]" Member="open" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="high" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="low" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[close]" Member="close" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="adjustedClose" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="volume" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="yf1_profile_HistoricalTickData1D" Member="yf1_profile" ThisKey="symbol" OtherKey="symbol" Type="yf1_profile" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HistoricalTickData1WK" Member="HistoricalTickData1WKs">
+    <Type Name="HistoricalTickData1WK">
+      <Column Name="symbol" Type="System.String" DbType="VarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="timestamp" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[open]" Member="open" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="high" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="low" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[close]" Member="close" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="adjustedClose" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="volume" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="yf1_profile_HistoricalTickData1WK" Member="yf1_profile" ThisKey="symbol" OtherKey="symbol" Type="yf1_profile" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.yf1_profile" Member="yf1_profiles">
+    <Type Name="yf1_profile">
+      <Column Name="symbol" Type="System.String" DbType="VarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="styleBoxUrl" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="family" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="categoryName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="legalType" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="longBusinessSummary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="yf1_profile_HistoricalDividendData" Member="HistoricalDividendDatas" ThisKey="symbol" OtherKey="symbol" Type="HistoricalDividendData" />
+      <Association Name="yf1_profile_HistoricalDividendDataAdjustedToWeekly" Member="HistoricalDividendDataAdjustedToWeeklies" ThisKey="symbol" OtherKey="symbol" Type="HistoricalDividendDataAdjustedToWeekly" />
+      <Association Name="yf1_profile_HistoricalTickData1D" Member="HistoricalTickData1Ds" ThisKey="symbol" OtherKey="symbol" Type="HistoricalTickData1D" />
+      <Association Name="yf1_profile_HistoricalTickData1WK" Member="HistoricalTickData1WKs" ThisKey="symbol" OtherKey="symbol" Type="HistoricalTickData1WK" />
+      <Association Name="yf1_profile_HistoricalStockSplit" Member="HistoricalStockSplits" ThisKey="symbol" OtherKey="symbol" Type="HistoricalStockSplit" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ForGrid_AppendAdjClose" Member="ForGrid_AppendAdjCloses">
+    <Type Name="ForGrid_AppendAdjClose">
+      <Column Name="symbol" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="minDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="adjustedClose" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HistoricalStockSplit" Member="HistoricalStockSplits">
+    <Type Name="HistoricalStockSplit">
+      <Column Name="symbol" Type="System.String" DbType="VarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="timestamp" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="numerator" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="denominator" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="splitRatio" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="yf1_profile_HistoricalStockSplit" Member="yf1_profile" ThisKey="symbol" OtherKey="symbol" Type="yf1_profile" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>

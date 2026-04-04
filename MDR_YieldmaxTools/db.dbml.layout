@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 11.25" name="db">
+  <DataContextMoniker Name="/dbDataContext" />
+  <nestedChildShapes>
+    <classShape Id="59028d41-e9ef-4762-89fd-cbd7d257f9d4" absoluteBounds="3.5, 1.25, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/dbDataContext/HistoricalDividendData" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7c66be46-638c-4eda-8665-6111dd9a0a3d" absoluteBounds="3.515, 1.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0f69bbdf-1142-4c2e-ba14-42e586525bc4" absoluteBounds="3.5, 3.5, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/dbDataContext/HistoricalDividendDataAdjustedToWeekly" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4a0bb6bc-6005-4fa0-8a7e-157c2ac25090" absoluteBounds="3.515, 3.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8084d7ac-1460-4635-a018-1fa1e1094432" absoluteBounds="3.5, 5.625, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/dbDataContext/HistoricalTickData1D" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5ffeca73-5841-41f7-b869-43b6d276c8ce" absoluteBounds="3.515, 6.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b674dd8d-23c7-497a-8c99-672a048a3d34" absoluteBounds="3.5, 8.625, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/dbDataContext/HistoricalTickData1WK" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cc638b58-204b-405a-83d7-8f60f662f522" absoluteBounds="3.515, 9.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="aeda8160-a718-4246-a0ed-59ab437914b8" absoluteBounds="0.75, 5.25, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/dbDataContext/yf1_profile" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2ff6d0df-b619-4794-b89a-ec15a6b4039a" absoluteBounds="0.765, 5.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.48437375 : 5.25); (1.48437375 : 1.94314697265625); (3.5 : 1.94314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbDataContext/yf1_profile/yf1_profile_HistoricalDividendData" />
+      <nodes>
+        <classShapeMoniker Id="aeda8160-a718-4246-a0ed-59ab437914b8" />
+        <classShapeMoniker Id="59028d41-e9ef-4762-89fd-cbd7d257f9d4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.2812525 : 5.25); (2.2812525 : 4.19314697265625); (3.5 : 4.19314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbDataContext/yf1_profile/yf1_profile_HistoricalDividendDataAdjustedToWeekly" />
+      <nodes>
+        <classShapeMoniker Id="aeda8160-a718-4246-a0ed-59ab437914b8" />
+        <classShapeMoniker Id="0f69bbdf-1142-4c2e-ba14-42e586525bc4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.41909912109375); (3.5 : 6.41909912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbDataContext/yf1_profile/yf1_profile_HistoricalTickData1D" />
+      <nodes>
+        <classShapeMoniker Id="aeda8160-a718-4246-a0ed-59ab437914b8" />
+        <classShapeMoniker Id="8084d7ac-1460-4635-a018-1fa1e1094432" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 7.2131982421875); (1.75 : 9.79890055338542); (3.5 : 9.79890055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbDataContext/yf1_profile/yf1_profile_HistoricalTickData1WK" />
+      <nodes>
+        <classShapeMoniker Id="aeda8160-a718-4246-a0ed-59ab437914b8" />
+        <classShapeMoniker Id="b674dd8d-23c7-497a-8c99-672a048a3d34" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="14842859-99b2-45e2-a72c-479ed3617a2a" absoluteBounds="6.375, 3.375, 2, 1.3862939453125">
+      <DataClassMoniker Name="/dbDataContext/ForGrid_AppendAdjClose" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4482671b-b175-4e63-b62a-55a63ecd8cd8" absoluteBounds="6.39, 3.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e395fe67-b339-4df1-b42a-c0c953afec38" absoluteBounds="7.125, 6.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/dbDataContext/HistoricalStockSplit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="30f80e4e-9177-43e8-a8dd-e8af15b66376" absoluteBounds="7.14, 7.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 5.40625); (8.125 : 5.40625); (8.125 : 6.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbDataContext/yf1_profile/yf1_profile_HistoricalStockSplit" />
+      <nodes>
+        <classShapeMoniker Id="aeda8160-a718-4246-a0ed-59ab437914b8" />
+        <classShapeMoniker Id="e395fe67-b339-4df1-b42a-c0c953afec38" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
