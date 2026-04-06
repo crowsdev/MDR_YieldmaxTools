@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Documents;
 using MDR_YieldmaxTools.Enums;
 using MDR_YieldmaxTools.Utils;
@@ -76,12 +77,12 @@ namespace MDR_YieldmaxTools.Tabs.DivPerDollar
                             result.Add(new DivPerDollarDataItem
                             {
                                 Symbol = symbol,
-                                Timestamp = div.timestamp,
-                                LastClose = (decimal) c,
-                                TypicalPrice = (decimal) typical,
-                                Dividend = (decimal) divVal,
-                                DivPerDollar = (decimal) dpd,
-                                DivPerDol_4MA = (decimal) dpdMA.Average,
+                                Timestamp = div.timestamp.Date,
+                                LastClose = (decimal) Math.Round(c, 4),
+                                TypicalPrice = (decimal) Math.Round(typical, 4),
+                                Dividend = (decimal) Math.Round(divVal, 4),
+                                DivPerDollar = (decimal) Math.Round(dpd, 4),
+                                DivPerDol_4MA = (decimal) Math.Round(dpdMA.Average, 4),
                                 DPD_Vs_4MA = (int) Math.Round(SussMath.GetPercentChange(dpdMA.Average, dpd))
                             });
 

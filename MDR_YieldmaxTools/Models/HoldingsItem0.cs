@@ -10,318 +10,47 @@ using MDR_YieldmaxTools.Utils;
 
 namespace MDR_YieldmaxTools.Models
 {
-    public class HoldingsItem0 : INotifyPropertyChanged
+    public class HoldingsItem0
     {
         public HoldingsTransactionData Transaction;
 
-        private Symbols _symbol;
-        public Symbols Symbol
-        {
-            get
-            {
-                return _symbol;
-            }
-            set
-            {
-                if (_symbol != value)
-                {
-                    _symbol = value;
-                    OnPropertyChanged("Symbol");
-                }
-            }
-        }
-        private DateTime timestamp;
-        public DateTime Timestamp
-        {
-            get
-            {
-                return timestamp;
-            }
-            set
-            {
-                if (timestamp != value)
-                {
-                    timestamp = value;
-                    OnPropertyChanged("Timestamp");
-                }
-            }
-        }
-        private double initialInvestment;
-        public double InitialInvestment
-        {
-            get
-            {
-                return initialInvestment;
-            }
-            set
-            {
-                if (initialInvestment != value)
-                {
-                    initialInvestment = value;
-                    OnPropertyChanged("InitialInvestment");
-                }
-            }
-        }
-        private double initialVolume;
-        public double InitialVolume
-        {
-            get
-            {
-                return initialVolume;
-            }
-            set
-            {
-                if (initialVolume != value)
-                {
-                    initialVolume = value;
-                    OnPropertyChanged("InitialVolume");
-                }
-            }
-        }
-        private double initialSharePrice;
-        public double InitialSharePrice
-        {
-            get
-            {
-                return initialSharePrice;
-            }
-            set
-            {
-                if (initialSharePrice != value)
-                {
-                    initialSharePrice = value;
-                    OnPropertyChanged("InitialSharePrice");
-                }
-            }
-        }
-        private double totalInvestment;
-        public double TotalInvestment
-        {
-            get
-            {
-                return totalInvestment;
-            }
-            set
-            {
-                if (totalInvestment != value)
-                {
-                    totalInvestment = value;
-                    OnPropertyChanged("TotalInvestment");
-                }
-            }
-        }
-        private double totalVolume;
-        public double TotalVolume
-        {
-            get
-            {
-                return totalVolume;
-            }
-            set
-            {
-                if (totalVolume != value)
-                {
-                    totalVolume = value;
-                    OnPropertyChanged("TotalVolume");
-                }
-            }
-        }
-        private double avgSharePrice;
-        [Browsable(false)]
-        public double AvgSharePrice
-        {
-            get
-            {
-                return avgSharePrice;
-            }
-            set
-            {
-                if (avgSharePrice != value)
-                {
-                    avgSharePrice = value;
-                    OnPropertyChanged("AvgSharePrice");
-                }
-            }
-        }
-        private double marketSharePrice;
-        public double MarketSharePrice
-        {
-            get
-            {
-                return marketSharePrice;
-            }
-            set
-            {
-                if (marketSharePrice != value)
-                {
-                    marketSharePrice = value;
-                    OnPropertyChanged("MarketSharePrice");
-                }
-            }
-        }
-        private double currentValue;
-        public double CurrentValue
-        {
-            get
-            {
-                return currentValue;
-            }
-            set
-            {
-                if (currentValue != value)
-                {
-                    currentValue = value;
-                    OnPropertyChanged("CurrentValue");
-                }
-            }
-        }
-        private double avgDivValue;
-        public double AvgDivValue
-        {
-            get
-            {
-                return avgDivValue;
-            }
-            set
-            {
-                if (avgDivValue != value)
-                {
-                    avgDivValue = value;
-                    OnPropertyChanged("AvgDivValue");
-                }
-            }
-        }
+        public Symbols Symbol;
+        
+        public DateTime Timestamp;
+        
+        public double InitialInvestment;
+        
+        public double InitialVolume;
+        
+        public double InitialSharePrice;
+        
+        public double TotalInvestment;
+        
+        public double TotalVolume;
+        
+        public double AvgSharePrice;
 
-        private int dividendCount;
-        public int DividendCount
-        {
-            get
-            {
-                return dividendCount;
-            }
-            set
-            {
-                if (dividendCount != value)
-                {
-                    dividendCount = value;
-                    OnPropertyChanged("DividendCount");
-                }
-            }
-        }
-        private double totalDividends;
-        public double TotalDividends
-        {
-            get
-            {
-                return totalDividends;
-            }
-            set
-            {
-                if (totalDividends != value)
-                {
-                    totalDividends = value;
-                    OnPropertyChanged("TotalDividends");
-                }
-            }
-        }
-        private double sharePricePercChange;
-        public double SharePricePercChange
-        {
-            get
-            {
-                return sharePricePercChange;
-            }
-            set
-            {
-                if (sharePricePercChange != value)
-                {
-                    sharePricePercChange = value;
-                    OnPropertyChanged("SharePricePercChange");
-                }
-            }
-        }
-        private double profitLoss;
-        public double ProfitLoss
-        {
-            get
-            {
-                return profitLoss;
-            }
-            set
-            {
-                if (profitLoss != value)
-                {
-                    profitLoss = value;
-                    OnPropertyChanged("ProfitLoss");
-                }
-            }
-        }
-        private double profitLossPerc;
-        public double ProfitLossPerc
-        {
-            get
-            {
-                return profitLossPerc;
-            }
-            set
-            {
-                if (profitLossPerc != value)
-                {
-                    profitLossPerc = value;
-                    OnPropertyChanged("ProfitLossPerc");
-                }
-            }
-        }
-        private bool drip;
-        public bool Drip
-        {
-            get
-            {
-                return drip;
-            }
-            set
-            {
-                if (drip != value)
-                {
-                    drip = value;
-                    OnPropertyChanged("Drip");
-                }
-            }
-        }
-        private double uSDHoldings;
-        public double USDHoldings
-        {
-            get
-            {
-                return uSDHoldings;
-            }
-            set
-            {
-                if (uSDHoldings != value)
-                {
-                    uSDHoldings = value;
-                    OnPropertyChanged("USDHoldings");
-                }
-            }
-        }
+        public double MarketSharePrice;
 
-        private string iD;
-        public string ID
-        {
-            get
-            {
-                return iD;
-            }
-            set
-            {
-                if (iD != value)
-                {
-                    iD = value;
-                    OnPropertyChanged("ID");
-                }
-            }
-        }
+        public double CurrentValue;
+        
+        public double AvgDivValue;
 
+        public int DividendCount;
+
+        public double TotalDividends;
+
+        public double SharePricePercChange;
+
+        public double ProfitLoss;
+
+        public double ProfitLossPerc;
+
+        public bool Drip;
+
+        public double USDHoldings;
+
+        public string ID;
 
         public List<DividendItem> ChildItems;
 
@@ -379,7 +108,13 @@ namespace MDR_YieldmaxTools.Models
                         this.TotalDividends += divPaid;
                         USDHoldings += divPaid;
 
-                        this.ChildItems.Add(new DividendItem(dd, this, lastClose));
+                        DividendItem di = new DividendItem(dd, this, lastClose);
+                        di.AvgDivReceived = di.DividendReceived;
+                        if (this.ChildItems.Count > 0)
+                        {
+                            di.AvgDivReceived = this.GetAverageDividendReceived();
+                        }
+                        this.ChildItems.Add(di);
                     }
 
                     if (this.Drip)
@@ -400,8 +135,8 @@ namespace MDR_YieldmaxTools.Models
                 MarketSharePrice = lastClose;
                 CurrentValue = TotalVolume * MarketSharePrice;
                 ProfitLoss = CurrentValue - InitialInvestment;
-                ProfitLossPerc = Math.Round(SussMath.GetPercentChange(InitialInvestment, CurrentValue), 2);
-                SharePricePercChange = Math.Round(SussMath.GetPercentChange(InitialSharePrice, MarketSharePrice), 2);
+                ProfitLossPerc = Math.Round(SussMath.GetPercentChange(InitialInvestment, CurrentValue), 0);
+                SharePricePercChange = Math.Round(SussMath.GetPercentChange(InitialSharePrice, MarketSharePrice), 0);
             }
         }
 
@@ -414,23 +149,9 @@ namespace MDR_YieldmaxTools.Models
             AvgSharePrice = TotalInvestment / TotalVolume;
         }
 
-        #region Notify for binding.
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public double GetAverageDividendReceived()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return ChildItems.Select(x => x.DividendReceived).Average();
         }
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
-
-        #endregion
     }
 }

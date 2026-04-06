@@ -58,6 +58,18 @@ namespace MDR_YieldmaxTools.Tabs.Holdings
             this.DataSourceChild = new BindingList<DividendItem>(this.ChildItems);
         }
 
+        // public void InitGridFormatting(RadGridView _grid)
+        // {
+        //     _grid.Columns["DivPerDollar"].ConditionalFormattingObjectList.Clear();
+        // 
+        //     ConditionalFormattingObject obj = new ConditionalFormattingObject("roi", ConditionTypes.GreaterOrEqual, $"{this.ROIMinDivPerDollar}", "", true);
+        //     obj.CellBackColor = Color.Lime;
+        //     obj.CellForeColor = Color.Black;
+        //     obj.TextAlignment = ContentAlignment.MiddleRight;
+        // 
+        //     _grid.Columns["DivPerDollar"].ConditionalFormattingObjectList.Add(obj);
+        // }
+
         public void AddHoldingsItem(Symbols _symbol, DateTime _date, double _pricePerUnit, double _volume, bool _drip)
         {
             HoldingsTransactionData htd = new HoldingsTransactionData
@@ -72,26 +84,11 @@ namespace MDR_YieldmaxTools.Tabs.Holdings
             HoldingsHandler.Instance.CurrentProfile.AddItem(htd);
         }
 
-        public void DeleteSelectedHoldings(List<GridViewRowInfo> _selectedRows)
+        public void DeleteSelectedHoldings(HoldingsTransactionData _selectedRow)
         {
-            if (_selectedRows.Count == 0) return;
-            
-            foreach (GridViewRowInfo row in _selectedRows)
+            if (HoldingsHandler.Instance.CurrentProfile.Items.Contains(_selectedRow))
             {
-                if (row.DataBoundItem is not HoldingsItem0 boundObject)
-                {
-                    throw new Exception("ERROR. Failed to get HoldingsItem from row.");
-                }
-
-                List<GridViewRowInfo> childRowsToRemove = new List<GridViewRowInfo>();
-
-                childRowsToRemove.Add(row);
-
-                foreach (GridViewRowInfo childRowToRemove in childRowsToRemove)
-                {
-                    HoldingsItem0 hi = childRowToRemove.DataBoundItem as HoldingsItem0;
-                    HoldingsHandler.Instance.CurrentProfile.Items.Remove(hi.Transaction);
-                }
+                HoldingsHandler.Instance.CurrentProfile.DeleteItem(_selectedRow);
             }
         }
     }

@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using MathNet.Numerics.Statistics;
@@ -146,7 +148,7 @@ namespace MDR_YieldmaxTools
             InitHoldingsGrid();
         }
 
-        private void InitHoldingsGrid()
+        private void InitHoldingsGrid0()
         {
             this.radGridView_holdings.MasterTemplate.Reset();
             this.radGridView_holdings.DataSource = GridHoldingsHeirarchical.DataSourceParent;
@@ -166,6 +168,175 @@ namespace MDR_YieldmaxTools
             radGridView_holdings.Relations.Add(relation);
         }
 
+        private void InitHoldingsGrid()
+        {
+            using (this.radGridView_holdings.DeferRefresh())
+            {
+                this.radGridView_holdings.MasterTemplate.Reset();
+                this.radGridView_holdings.AutoGenerateHierarchy = true;
+
+                Holdings_SetupMasterTemplate();
+
+                GridViewTemplate childTemplate = Holdings_SetupChildTemplate();
+                childTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
+                childTemplate.ReadOnly = true;
+                childTemplate.AllowAddNewRow = false;
+                childTemplate.AllowDragToGroup = false;
+                childTemplate.AllowSearchRow = false;
+
+                GridViewRelation relation = new GridViewRelation(this.radGridView_holdings.MasterTemplate, childTemplate);
+                relation.RelationName = "parentchild";
+                relation.ParentColumnNames.Add("ID");
+                relation.ChildColumnNames.Add("ParentID");
+                this.radGridView_holdings.Relations.Add(relation);
+
+                foreach (HoldingsItem0 h in GridHoldingsHeirarchical.DataSourceParent)
+                {
+                    // Parent rows. HoldingsItem0.
+                    // Symbol, Timestamp, InitialInvestment, InitialVolume, InitialSharePrice, TotalInvestment, TotalVolume, AvgSharePrice, MarketSharePrice, CurrentValue, AvgDivValue, DividendCount, TotalDividends, SharePricePercChange, ProfitLoss, ProfitLossPerc, Drip, USDHoldings, ID
+                    this.radGridView_holdings.MasterTemplate.Rows.Add(new object[]
+                    {
+                        h.Symbol.ToString(), h.Timestamp, h.InitialInvestment, h.InitialVolume, h.InitialSharePrice, h.TotalInvestment, h.TotalVolume, h.AvgSharePrice, h.MarketSharePrice, h.CurrentValue, h.AvgDivValue, h.DividendCount, h.TotalDividends, h.SharePricePercChange, h.ProfitLoss, h.ProfitLossPerc, h.Drip, h.USDHoldings, h.ID
+                    });
+                }
+
+                foreach (DividendItem d in GridHoldingsHeirarchical.DataSourceChild)
+                {
+                    // Child rows. DividendItem.
+                    // Symbol, Timestamp, SharePrice, TotalVolume, DividendPerShare, DividendReceived, AvgDivReceived, DivPerInvestedDollar, ParentID
+                    childTemplate.Rows.Add(new object[]
+                    {
+                        d.Symbol, d.Timestamp, d.SharePrice, d.TotalVolume, d.DividendPerShare, d.DividendReceived, d.AvgDivReceived, d.DivPerInvestedDollar, d.ParentID
+                    });
+                }
+            }
+        }
+
+        private void Holdings_SetupMasterTemplate()
+        {
+            GridViewTextBoxColumn SymbolCol = new GridViewTextBoxColumn("Symbol");
+            this.radGridView_holdings.MasterTemplate.Columns.Add(SymbolCol);
+
+            GridViewDateTimeColumn TimestampCol = new GridViewDateTimeColumn("Timestamp");
+            TimestampCol.FormatString = "{0:MM/dd/yyyy}";
+            this.radGridView_holdings.MasterTemplate.Columns.Add(TimestampCol);
+
+            GridViewDecimalColumn InitialInvestmentCol = new GridViewDecimalColumn("InitialInvestment");
+            InitialInvestmentCol.DecimalPlaces = 2;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(InitialInvestmentCol);
+
+            GridViewDecimalColumn InitialVolumeCol = new GridViewDecimalColumn("InitialVolume");
+            InitialVolumeCol.DecimalPlaces = 0;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(InitialVolumeCol);
+
+            GridViewDecimalColumn InitialSharePriceCol = new GridViewDecimalColumn("InitialSharePrice");
+            InitialSharePriceCol.DecimalPlaces = 4;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(InitialSharePriceCol);
+
+            GridViewDecimalColumn TotalInvestmentCol = new GridViewDecimalColumn("TotalInvestment");
+            TotalInvestmentCol.DecimalPlaces = 2;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(TotalInvestmentCol);
+
+            GridViewDecimalColumn TotalVolumeCol = new GridViewDecimalColumn("TotalVolume");
+            TotalVolumeCol.DecimalPlaces = 0;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(TotalVolumeCol);
+
+            GridViewDecimalColumn AvgSharePriceCol = new GridViewDecimalColumn("AvgSharePrice");
+            AvgSharePriceCol.DecimalPlaces = 4;
+            AvgSharePriceCol.IsVisible = false;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(AvgSharePriceCol);
+
+            GridViewDecimalColumn MarketSharePriceCol = new GridViewDecimalColumn("MarketSharePrice");
+            MarketSharePriceCol.DecimalPlaces = 4;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(MarketSharePriceCol);
+
+            GridViewDecimalColumn CurrentValueCol = new GridViewDecimalColumn("CurrentValue");
+            CurrentValueCol.DecimalPlaces = 2;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(CurrentValueCol);
+
+            GridViewDecimalColumn AvgDivValueCol = new GridViewDecimalColumn("AvgDivValue");
+            AvgDivValueCol.DecimalPlaces = 4;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(AvgDivValueCol);
+
+            GridViewDecimalColumn DividendCountCol = new GridViewDecimalColumn("DividendCount");
+            DividendCountCol.DecimalPlaces = 0;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(DividendCountCol);
+
+            GridViewDecimalColumn TotalDividendsCol = new GridViewDecimalColumn("TotalDividends");
+            TotalDividendsCol.DecimalPlaces = 2;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(TotalDividendsCol);
+
+            GridViewDecimalColumn SharePricePercChangeCol = new GridViewDecimalColumn("SharePricePercChange");
+            SharePricePercChangeCol.DecimalPlaces = 2;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(SharePricePercChangeCol);
+
+            GridViewDecimalColumn ProfitLossCol = new GridViewDecimalColumn("ProfitLoss");
+            ProfitLossCol.DecimalPlaces = 2;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(ProfitLossCol);
+
+            GridViewDecimalColumn ProfitLossPercCol = new GridViewDecimalColumn("ProfitLossPerc");
+            ProfitLossPercCol.DecimalPlaces = 2;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(ProfitLossPercCol);
+
+            GridViewCheckBoxColumn DripCol = new GridViewCheckBoxColumn("Drip");
+            this.radGridView_holdings.MasterTemplate.Columns.Add(DripCol);
+
+            GridViewDecimalColumn USDHoldingsCol = new GridViewDecimalColumn("USDHoldings");
+            USDHoldingsCol.DecimalPlaces = 2;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(USDHoldingsCol);
+
+            GridViewTextBoxColumn IDCol = new GridViewTextBoxColumn("ID");
+            IDCol.IsVisible = false;
+            this.radGridView_holdings.MasterTemplate.Columns.Add(IDCol);
+
+            this.radGridView_holdings.MasterTemplate.ReadOnly = true;
+            this.radGridView_holdings.MasterTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private GridViewTemplate Holdings_SetupChildTemplate()
+        {
+            GridViewTemplate result = new GridViewTemplate();
+
+            GridViewTextBoxColumn symbolCol = new GridViewTextBoxColumn("Symbol");
+            result.Columns.Add(symbolCol);
+
+            GridViewDateTimeColumn timestampCol = new GridViewDateTimeColumn("Timestamp");
+            timestampCol.FormatString = "{0:MM/dd/yyyy}";
+            result.Columns.Add(timestampCol);
+
+            GridViewDecimalColumn sharepriceCol = new GridViewDecimalColumn("SharePrice");
+            sharepriceCol.DecimalPlaces = 4;
+            result.Columns.Add(sharepriceCol);
+
+            GridViewDecimalColumn totalvolumeCol = new GridViewDecimalColumn("TotalVolume");
+            totalvolumeCol.DecimalPlaces = 0;
+            result.Columns.Add(totalvolumeCol);
+
+            GridViewDecimalColumn dividendPerShareCol = new GridViewDecimalColumn("DividendPerShare");
+            dividendPerShareCol.DecimalPlaces = 4;
+            result.Columns.Add(dividendPerShareCol);
+
+            GridViewDecimalColumn dividendReceivedCol = new GridViewDecimalColumn("DividendReceived");
+            dividendReceivedCol.DecimalPlaces = 2;
+            result.Columns.Add(dividendReceivedCol);
+
+            GridViewDecimalColumn avgDivReceivedCol = new GridViewDecimalColumn("AvgDivReceived");
+            avgDivReceivedCol.DecimalPlaces = 2;
+            result.Columns.Add(avgDivReceivedCol);
+
+            GridViewDecimalColumn divPerInvestedDollarCol = new GridViewDecimalColumn("DivPerInvestedDollar");
+            divPerInvestedDollarCol.DecimalPlaces = 4;
+            result.Columns.Add(divPerInvestedDollarCol);
+
+            GridViewTextBoxColumn parentIDCol = new GridViewTextBoxColumn("ParentID");
+            parentIDCol.IsVisible = false;
+            result.Columns.Add(parentIDCol);
+
+            this.radGridView_holdings.MasterTemplate.Templates.Add(result);
+
+            return result;
+        }
+
         #endregion
 
 
@@ -174,12 +345,19 @@ namespace MDR_YieldmaxTools
             ThemeResolutionService.ApplicationThemeName = "Office2019Dark";
             this.Text = $"MDR Yieldmax Tools v{GlobalVars.Version}";
 
-            InitCustomDataSource();
+            Thread _t0 = new Thread(new ThreadStart(InitCustomDataSource));
+            _t0.IsBackground = true;
+            _t0.Start();
 
             InitTab2();
 
             // DoTest();
-            CVF = new CorrelationVectorsFactory(GlobalVars.AllSymbols);
+            Thread _t1 = new Thread(new ThreadStart(() =>
+            {
+                CVF = new CorrelationVectorsFactory(GlobalVars.AllSymbols);
+            }));
+            _t1.IsBackground = true;
+            _t1.Start();
             DoRadHeatmap();
 
             this.InitTrendingCorrelationTab();
@@ -211,8 +389,18 @@ namespace MDR_YieldmaxTools
 
         private void radButton_del_Click(object sender, EventArgs e)
         {
+            HoldingsTransactionData htd = null;
+            var timestamp = (DateTime) this.radGridView_holdings.SelectedRows[0].Cells["Timestamp"].Value;
+            var symbol = (Symbols) Enum.Parse(typeof(Symbols), this.radGridView_holdings.SelectedRows[0].Cells["Symbol"].Value.ToString());
+            double pps = double.Parse(this.radGridView_holdings.SelectedRows[0].Cells["InitialSharePrice"].Value.ToString());
+            var vol = double.Parse(this.radGridView_holdings.SelectedRows[0].Cells["InitialVolume"].Value.ToString());
+            if (HoldingsHandler.Instance.CurrentProfile.Items.Any(x => x.Timestamp == timestamp && x.Symbol == symbol && x.PricePerShare == pps && x.Volume == vol))
+            {
+                htd = HoldingsHandler.Instance.CurrentProfile.Items.Single(x => x.Timestamp == timestamp && x.Symbol == symbol && x.PricePerShare == pps && x.Volume == vol);
+            }
+
             // Delete selected holdings.
-            GridHoldingsHeirarchical.DeleteSelectedHoldings(this.radGridView_holdings.SelectedRows.ToList());
+            GridHoldingsHeirarchical.DeleteSelectedHoldings(htd);
             // radGridView_holdings.DataSource = null;
             // foreach (GridViewTemplate template in this.radGridView_holdings.Templates)
             // {
@@ -222,7 +410,9 @@ namespace MDR_YieldmaxTools
             InitHoldingsGrid();
             // radGridView_holdings.DataSource = GridHoldingsHeirarchical.DataSourceParent;
             // radGridView_holdings.Templates[0].DataSource = GridHoldingsHeirarchical.DataSourceChild;
-            radGridView_holdings.Refresh();
+            // radGridView_holdings.Refresh();
+
+
         }
 
         #region Correlation HeatMap
