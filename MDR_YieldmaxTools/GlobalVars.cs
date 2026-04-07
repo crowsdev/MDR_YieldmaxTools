@@ -6,7 +6,7 @@ namespace MDR_YieldmaxTools
 {
     public class GlobalVars
     {
-        public static string Version = "1.4";
+        public static string Version = "1.5";
 
         public static List<Symbols> AllSymbols = new List<Symbols>()
         {

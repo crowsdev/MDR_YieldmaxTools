@@ -141,31 +141,11 @@ namespace MDR_YieldmaxTools
 
         #region Tab2 Holdings.
 
-        private void InitTab2()
+        private void InitHoldingsTab()
         {
             this.radDropDownList_symbol.DataSource = GlobalVars.AllSymbols;
             GridHoldingsHeirarchical = new HoldingsHeirarchicalGrid();
             InitHoldingsGrid();
-        }
-
-        private void InitHoldingsGrid0()
-        {
-            this.radGridView_holdings.MasterTemplate.Reset();
-            this.radGridView_holdings.DataSource = GridHoldingsHeirarchical.DataSourceParent;
-            this.radGridView_holdings.AutoGenerateHierarchy = true;
-            GridViewTemplate firstChildTemplate = new GridViewTemplate();
-            firstChildTemplate.DataSource = GridHoldingsHeirarchical.DataSourceChild;
-            firstChildTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
-            this.radGridView_holdings.MasterTemplate.Templates.Add(firstChildTemplate);
-            firstChildTemplate.DataSource = GridHoldingsHeirarchical.DataSourceChild;
-
-            GridViewRelation relation = new GridViewRelation(radGridView_holdings.MasterTemplate);
-            relation.ChildTemplate = firstChildTemplate;
-
-            relation.RelationName = "parentchild";
-            relation.ParentColumnNames.Add(nameof(HoldingsItem0.ID));
-            relation.ChildColumnNames.Add(nameof(DividendItem.ParentID));
-            radGridView_holdings.Relations.Add(relation);
         }
 
         private void InitHoldingsGrid()
@@ -349,7 +329,7 @@ namespace MDR_YieldmaxTools
             _t0.IsBackground = true;
             _t0.Start();
 
-            InitTab2();
+            InitHoldingsTab();
 
             // DoTest();
             Thread _t1 = new Thread(new ThreadStart(() =>
@@ -647,7 +627,7 @@ namespace MDR_YieldmaxTools
         {
             // Clear the grid.
             this.radGridView_projection.Rows.Clear();
-            this.Projection = ProjectionHandler.Create(Symbols.MARO, (int)this.numericUpDown_proj_duration.Value, (double)this.numericUpDown_proj_shareprice.Value, (double)numericUpDown_proj_volume.Value, (double)numericUpDown_proj_dividend.Value, (double)numericUpDown_proj_shareChange.Value, this.CalculateDividendPercentChange((double)numericUpDown_proj_shareChange.Value));
+            this.Projection = ProjectionHandler.Create(Symbols.MARO, (int)this.numericUpDown_proj_duration.Value, (double)this.numericUpDown_proj_shareprice.Value, (double)numericUpDown_proj_volume.Value, (double)numericUpDown_proj_dividend.Value, (double)numericUpDown_proj_shareChange.Value, (double)numericUpDown_proj_shareChange.Value, (double) this.numericUpDown_proj_weeklyContribution.Value);
             var dataSource = this.Projection.RunProjection();
 
             for (int i = 0; i < this.Projection.ProjectionItems.Length; i++)
@@ -657,9 +637,17 @@ namespace MDR_YieldmaxTools
             }
         }
 
-        private double CalculateDividendPercentChange(double _sharePricePercentChange)
+        private void radButton_proj_append_Click(object sender, EventArgs e)
         {
-            return Math.Round(_sharePricePercentChange * 0.75, 2);
+            // Clear the grid.
+            this.radGridView_projection.Rows.Clear();
+            this.Projection.AppendProjection((int)this.numericUpDown_proj_duration.Value, (double)numericUpDown_proj_shareChange.Value, (double)numericUpDown_proj_shareChange.Value, (double)this.numericUpDown_proj_weeklyContribution.Value);
+
+            for (int i = 0; i < this.Projection.ProjectionItems.Length; i++)
+            {
+                var pi = this.Projection.ProjectionItems[i];
+                this.radGridView_projection.Rows.Add(new object[] { i, Math.Round(pi.SharePrice, 2), pi.Volume, Math.Round(pi.TotalDividend, 2), pi.DripAddVolume, Math.Round(pi.CashUSD, 2), Math.Round(pi.TotalValue, 2) });
+            }
         }
 
         private void radButton_proj_export_Click(object sender, EventArgs e)
@@ -726,6 +714,19 @@ namespace MDR_YieldmaxTools
             e.ToolTip.AutoPopDelay = 15000;
             e.ToolTipText = "You can add your own actual holdings and also any 'what-if' \n" +
                             "scenarios you want to see played out up to the latest dividend date.\n";
+        }
+
+        private void radGroupBox_proj_weeklyContribution_ToolTipTextNeeded(object sender, ToolTipTextNeededEventArgs e)
+        {
+            e.ToolTip.AutoPopDelay = 15000;
+            e.ToolTipText = "Invest more money every week.";
+        }
+
+        private void radButton_proj_append_ToolTipTextNeeded(object sender, ToolTipTextNeededEventArgs e)
+        {
+            e.ToolTip.AutoPopDelay = 15000;
+            e.ToolTipText = "Continue with current table and add another number of weeks with a different share percent change.\n" +
+                            " Will project using the last share price, volume and dividend from existing table.";
         }
     }
 }
