@@ -287,6 +287,12 @@
     <Compile Include="Tabs\DivPerDollar\DivPerDollarHandler.cs" />
     <Compile Include="Tabs\Holdings\HoldingsHandler.cs" />
     <Compile Include="Tabs\Holdings\HoldingsHeirarchicalGrid.cs" />
+    <Compile Include="Tabs\Projection\ProjectionDebugForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tabs\Projection\ProjectionDebugForm.Designer.cs">
+      <DependentUpon>ProjectionDebugForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tabs\Projection\ProjectionHandler.cs" />
     <Compile Include="Tabs\Projection\ProjectionItem.cs" />
     <Compile Include="Utils\MovingSeries.cs" />
@@ -309,6 +315,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Tabs\Correlation\SymbolPairPopup.resx" />
+    <EmbeddedResource Include="Tabs\Projection\ProjectionDebugForm.resx">
+      <DependentUpon>ProjectionDebugForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="db.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>db.designer.cs</LastGenOutput>

@@ -14,7 +14,7 @@ namespace MDR_YieldmaxTools.Tabs.Holdings
     {
         public BindingList<HoldingsItem0> DataSourceParent;
         public BindingList<DividendItem> DataSourceChild;
-        private List<DividendItem> ChildItems;
+        public List<DividendItem> ChildItems;
 
         public HoldingsHeirarchicalGrid()
         {
