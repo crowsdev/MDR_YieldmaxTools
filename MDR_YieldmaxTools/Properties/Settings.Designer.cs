@@ -26,8 +26,8 @@ namespace MDR_YieldmaxTools.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=nothingsussindustries.duckdns.org;Initial Catalog=mdr;User ID=xxx;Pas" +
-            "sword=x;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=mdr;Integrated Security=True;Connect Timeou" +
+            "t=30;Encrypt=False;TrustServerCertificate=False")]
         public string mdrConnectionString {
             get {
                 return ((string)(this["mdrConnectionString"]));
