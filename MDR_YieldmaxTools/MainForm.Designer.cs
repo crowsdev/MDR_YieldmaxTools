@@ -38,12 +38,12 @@ namespace MDR_YieldmaxTools
             Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn5 = new Telerik.WinControls.UI.GridViewDecimalColumn();
             Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn6 = new Telerik.WinControls.UI.GridViewDecimalColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition3 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition4 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage_divperdollartable = new System.Windows.Forms.TabPage();
             this.radSplitContainer_dpd = new Telerik.WinControls.UI.RadSplitContainer();
@@ -63,6 +63,7 @@ namespace MDR_YieldmaxTools
             this.radPanel_tab2 = new Telerik.WinControls.UI.RadPanel();
             this.radPictureBox1 = new Telerik.WinControls.UI.RadPictureBox();
             this.radGroupBox_holdings = new Telerik.WinControls.UI.RadGroupBox();
+            this.radGridView_holdings = new Telerik.WinControls.UI.RadGridView();
             this.radGroupBox1 = new Telerik.WinControls.UI.RadGroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.radButton_add = new Telerik.WinControls.UI.RadButton();
@@ -109,6 +110,8 @@ namespace MDR_YieldmaxTools
             this.radGroupBox_sharePercentChange = new Telerik.WinControls.UI.RadGroupBox();
             this.numericUpDown_proj_shareChange = new System.Windows.Forms.NumericUpDown();
             this.radGroupBox_dividend = new Telerik.WinControls.UI.RadGroupBox();
+            this.radRadioButton_proj_dividend_avg = new Telerik.WinControls.UI.RadRadioButton();
+            this.radRadioButton_proj_dividend_low = new Telerik.WinControls.UI.RadRadioButton();
             this.numericUpDown_proj_dividend = new System.Windows.Forms.NumericUpDown();
             this.radGroupBox_volume = new Telerik.WinControls.UI.RadGroupBox();
             this.numericUpDown_proj_volume = new System.Windows.Forms.NumericUpDown();
@@ -123,7 +126,6 @@ namespace MDR_YieldmaxTools
             this.crystalDarkTheme1 = new Telerik.WinControls.Themes.CrystalDarkTheme();
             this.office2019DarkTheme1 = new Telerik.WinControls.Themes.Office2019DarkTheme();
             this.radSaveFileDialog_projection = new Telerik.WinControls.UI.RadSaveFileDialog();
-            this.radGridView_holdings = new Telerik.WinControls.UI.RadGridView();
             this.tabControl.SuspendLayout();
             this.tabPage_divperdollartable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radSplitContainer_dpd)).BeginInit();
@@ -150,6 +152,8 @@ namespace MDR_YieldmaxTools
             ((System.ComponentModel.ISupportInitialize)(this.radPictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox_holdings)).BeginInit();
             this.radGroupBox_holdings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView_holdings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView_holdings.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).BeginInit();
             this.radGroupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -211,6 +215,8 @@ namespace MDR_YieldmaxTools
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_proj_shareChange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox_dividend)).BeginInit();
             this.radGroupBox_dividend.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radRadioButton_proj_dividend_avg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radRadioButton_proj_dividend_low)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_proj_dividend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox_volume)).BeginInit();
             this.radGroupBox_volume.SuspendLayout();
@@ -225,8 +231,6 @@ namespace MDR_YieldmaxTools
             this.splitPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView_projection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView_projection.MasterTemplate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView_holdings)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView_holdings.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -539,6 +543,29 @@ namespace MDR_YieldmaxTools
             this.radGroupBox_holdings.TabIndex = 1;
             this.radGroupBox_holdings.Text = "Holdings";
             this.radGroupBox_holdings.ThemeName = "Office2019Dark";
+            // 
+            // radGridView_holdings
+            // 
+            this.radGridView_holdings.AutoGenerateHierarchy = true;
+            this.radGridView_holdings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radGridView_holdings.EnableGestures = false;
+            this.radGridView_holdings.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radGridView_holdings.Location = new System.Drawing.Point(2, 18);
+            // 
+            // 
+            // 
+            this.radGridView_holdings.MasterTemplate.AllowAddNewRow = false;
+            this.radGridView_holdings.MasterTemplate.AllowDeleteRow = false;
+            this.radGridView_holdings.MasterTemplate.AllowEditRow = false;
+            this.radGridView_holdings.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
+            this.radGridView_holdings.MasterTemplate.EnableAlternatingRowColor = true;
+            this.radGridView_holdings.MasterTemplate.EnableGrouping = false;
+            this.radGridView_holdings.MasterTemplate.ViewDefinition = tableViewDefinition2;
+            this.radGridView_holdings.Name = "radGridView_holdings";
+            this.radGridView_holdings.ReadOnly = true;
+            this.radGridView_holdings.Size = new System.Drawing.Size(1055, 397);
+            this.radGridView_holdings.TabIndex = 0;
+            this.radGridView_holdings.ThemeName = "Office2019Dark";
             // 
             // radGroupBox1
             // 
@@ -1146,7 +1173,7 @@ namespace MDR_YieldmaxTools
             this.radGroupBox_proj_weeklyContribution.Controls.Add(this.numericUpDown_proj_weeklyContribution);
             this.radGroupBox_proj_weeklyContribution.HeaderMargin = new System.Windows.Forms.Padding(1);
             this.radGroupBox_proj_weeklyContribution.HeaderText = "WeeklyContribution";
-            this.radGroupBox_proj_weeklyContribution.Location = new System.Drawing.Point(5, 430);
+            this.radGroupBox_proj_weeklyContribution.Location = new System.Drawing.Point(5, 457);
             this.radGroupBox_proj_weeklyContribution.Name = "radGroupBox_proj_weeklyContribution";
             this.radGroupBox_proj_weeklyContribution.Size = new System.Drawing.Size(142, 55);
             this.radGroupBox_proj_weeklyContribution.TabIndex = 7;
@@ -1201,7 +1228,7 @@ namespace MDR_YieldmaxTools
             this.radGroupBox_sharePercentChange.Controls.Add(this.numericUpDown_proj_shareChange);
             this.radGroupBox_sharePercentChange.HeaderMargin = new System.Windows.Forms.Padding(1);
             this.radGroupBox_sharePercentChange.HeaderText = "SharePercentChange";
-            this.radGroupBox_sharePercentChange.Location = new System.Drawing.Point(5, 369);
+            this.radGroupBox_sharePercentChange.Location = new System.Drawing.Point(5, 396);
             this.radGroupBox_sharePercentChange.Name = "radGroupBox_sharePercentChange";
             this.radGroupBox_sharePercentChange.Size = new System.Drawing.Size(142, 55);
             this.radGroupBox_sharePercentChange.TabIndex = 4;
@@ -1235,15 +1262,42 @@ namespace MDR_YieldmaxTools
             this.radGroupBox_dividend.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
             this.radGroupBox_dividend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.radGroupBox_dividend.Controls.Add(this.radRadioButton_proj_dividend_avg);
+            this.radGroupBox_dividend.Controls.Add(this.radRadioButton_proj_dividend_low);
             this.radGroupBox_dividend.Controls.Add(this.numericUpDown_proj_dividend);
             this.radGroupBox_dividend.HeaderMargin = new System.Windows.Forms.Padding(1);
             this.radGroupBox_dividend.HeaderText = "Dividend";
             this.radGroupBox_dividend.Location = new System.Drawing.Point(5, 308);
             this.radGroupBox_dividend.Name = "radGroupBox_dividend";
-            this.radGroupBox_dividend.Size = new System.Drawing.Size(142, 55);
+            this.radGroupBox_dividend.Size = new System.Drawing.Size(142, 82);
             this.radGroupBox_dividend.TabIndex = 3;
             this.radGroupBox_dividend.Text = "Dividend";
             this.radGroupBox_dividend.ThemeName = "Office2019Dark";
+            // 
+            // radRadioButton_proj_dividend_avg
+            // 
+            this.radRadioButton_proj_dividend_avg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.radRadioButton_proj_dividend_avg.Location = new System.Drawing.Point(94, 50);
+            this.radRadioButton_proj_dividend_avg.Name = "radRadioButton_proj_dividend_avg";
+            this.radRadioButton_proj_dividend_avg.Size = new System.Drawing.Size(43, 19);
+            this.radRadioButton_proj_dividend_avg.TabIndex = 3;
+            this.radRadioButton_proj_dividend_avg.TabStop = false;
+            this.radRadioButton_proj_dividend_avg.Tag = "avg";
+            this.radRadioButton_proj_dividend_avg.Text = "Avg";
+            this.radRadioButton_proj_dividend_avg.ThemeName = "Office2019Dark";
+            this.radRadioButton_proj_dividend_avg.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.radRadioButton_proj_dividend_low_avg_ToggleStateChanged);
+            // 
+            // radRadioButton_proj_dividend_low
+            // 
+            this.radRadioButton_proj_dividend_low.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.radRadioButton_proj_dividend_low.Location = new System.Drawing.Point(5, 50);
+            this.radRadioButton_proj_dividend_low.Name = "radRadioButton_proj_dividend_low";
+            this.radRadioButton_proj_dividend_low.Size = new System.Drawing.Size(43, 19);
+            this.radRadioButton_proj_dividend_low.TabIndex = 2;
+            this.radRadioButton_proj_dividend_low.Tag = "low";
+            this.radRadioButton_proj_dividend_low.Text = "Low";
+            this.radRadioButton_proj_dividend_low.ThemeName = "Office2019Dark";
+            this.radRadioButton_proj_dividend_low.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.radRadioButton_proj_dividend_low_avg_ToggleStateChanged);
             // 
             // numericUpDown_proj_dividend
             // 
@@ -1429,30 +1483,6 @@ namespace MDR_YieldmaxTools
             this.radSaveFileDialog_projection.RestoreDirectory = true;
             this.radSaveFileDialog_projection.ShowHiddenFiles = true;
             // 
-            // radGridView_holdings
-            // 
-            this.radGridView_holdings.AutoGenerateHierarchy = true;
-            this.radGridView_holdings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radGridView_holdings.EnableGestures = false;
-            this.radGridView_holdings.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radGridView_holdings.Location = new System.Drawing.Point(2, 18);
-            // 
-            // 
-            // 
-            this.radGridView_holdings.MasterTemplate.AllowAddNewRow = false;
-            this.radGridView_holdings.MasterTemplate.AllowDeleteRow = false;
-            this.radGridView_holdings.MasterTemplate.AllowEditRow = false;
-            this.radGridView_holdings.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
-            this.radGridView_holdings.MasterTemplate.EnableAlternatingRowColor = true;
-            this.radGridView_holdings.MasterTemplate.EnableGrouping = false;
-            this.radGridView_holdings.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
-            this.radGridView_holdings.MasterTemplate.ViewDefinition = tableViewDefinition2;
-            this.radGridView_holdings.Name = "radGridView_holdings";
-            this.radGridView_holdings.ReadOnly = true;
-            this.radGridView_holdings.Size = new System.Drawing.Size(1055, 397);
-            this.radGridView_holdings.TabIndex = 0;
-            this.radGridView_holdings.ThemeName = "Office2019Dark";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1492,6 +1522,8 @@ namespace MDR_YieldmaxTools
             ((System.ComponentModel.ISupportInitialize)(this.radPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox_holdings)).EndInit();
             this.radGroupBox_holdings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView_holdings.MasterTemplate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView_holdings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).EndInit();
             this.radGroupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -1556,6 +1588,9 @@ namespace MDR_YieldmaxTools
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_proj_shareChange)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox_dividend)).EndInit();
             this.radGroupBox_dividend.ResumeLayout(false);
+            this.radGroupBox_dividend.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radRadioButton_proj_dividend_avg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radRadioButton_proj_dividend_low)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_proj_dividend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox_volume)).EndInit();
             this.radGroupBox_volume.ResumeLayout(false);
@@ -1570,8 +1605,6 @@ namespace MDR_YieldmaxTools
             this.splitPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radGridView_projection.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView_projection)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView_holdings.MasterTemplate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView_holdings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -1663,5 +1696,7 @@ namespace MDR_YieldmaxTools
         public System.Windows.Forms.NumericUpDown numericUpDown_proj_initialInvestment;
         public Telerik.WinControls.UI.RadButton radButton_proj_debug;
         public Telerik.WinControls.UI.RadGridView radGridView_holdings;
+        public Telerik.WinControls.UI.RadRadioButton radRadioButton_proj_dividend_avg;
+        public Telerik.WinControls.UI.RadRadioButton radRadioButton_proj_dividend_low;
     }
 }

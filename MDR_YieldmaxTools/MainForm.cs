@@ -73,14 +73,55 @@ namespace MDR_YieldmaxTools
 
         public ProjectionHandler Projection;
         public bool bAutoSettingActive = false;
+        public string SelectedDividendMode = "low";
+        public double LowestWeeklyDivPerDollar;
+        public double MinAverageDivPerDollar;
+        public double SelectedDivPerDollarValue;
 
         #endregion
 
         #endregion
+
+        // Async example.
+
+        // private void button_Click(object sender, EventArgs e)
+        // {
+        //     var task = Task.Run<int>(
+        //         () => this.TestSynchronous());
+        // 
+        //     task.Wait();
+        // 
+        //     MessageBox.Show(task.Result.ToString());
+        // }
 
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            ThemeResolutionService.ApplicationThemeName = "Office2019Dark";
+            this.Text = $"MDR Yieldmax Tools v{GlobalVars.Version}";
+
+            Thread _t0 = new Thread(new ThreadStart(InitCustomDataSource));
+            _t0.IsBackground = true;
+            _t0.Start();
+
+            InitHoldingsTab();
+
+            // DoTest();
+            Thread _t1 = new Thread(new ThreadStart(() =>
+            {
+                CVF = new CorrelationVectorsFactory(GlobalVars.AllSymbols);
+            }));
+            _t1.IsBackground = true;
+            _t1.Start();
+            DoRadHeatmap();
+
+            this.InitTrendingCorrelationTab();
+
+            this.InitProjectionTab();
         }
 
         #region DivPerDollarTable Tab.
@@ -358,32 +399,6 @@ namespace MDR_YieldmaxTools
         }
 
         #endregion
-
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            ThemeResolutionService.ApplicationThemeName = "Office2019Dark";
-            this.Text = $"MDR Yieldmax Tools v{GlobalVars.Version}";
-
-            Thread _t0 = new Thread(new ThreadStart(InitCustomDataSource));
-            _t0.IsBackground = true;
-            _t0.Start();
-
-            InitHoldingsTab();
-
-            // DoTest();
-            Thread _t1 = new Thread(new ThreadStart(() =>
-            {
-                CVF = new CorrelationVectorsFactory(GlobalVars.AllSymbols);
-            }));
-            _t1.IsBackground = true;
-            _t1.Start();
-            DoRadHeatmap();
-
-            this.InitTrendingCorrelationTab();
-
-            this.InitProjectionTab();
-        }
 
         private void radButton_add_Click(object sender, EventArgs e)
         {
@@ -800,6 +815,7 @@ namespace MDR_YieldmaxTools
             double sharePrice = -1;
             int volume = -1;
             double avgDividend = -1;
+            double lowDividend = -1;
 
             using (var db = new dbDataContext())
             {
@@ -845,17 +861,37 @@ namespace MDR_YieldmaxTools
             }
 
             // Add controls for user to select dividend mode. lowestEver or average.
-            double lowestWeeklyDpd = DividendPerDollarDict.Values.Min();
+            this.LowestWeeklyDivPerDollar = DividendPerDollarDict.Values.Min();
             double overallAverageDpd = DividendPerDollarDict.Values.Average();
             int skipIndexRecentAvgDpd = DividendPerDollarDict.Values.Count - 4;
             double recentAverageDpd = DividendPerDollarDict.Values.Skip(skipIndexRecentAvgDpd).Average();
-            double minAverage = Math.Min(overallAverageDpd, recentAverageDpd);
+            this.MinAverageDivPerDollar = Math.Min(overallAverageDpd, recentAverageDpd);
+            this.HandleSelectedDividendMode((decimal)sharePrice);
 
             this.bAutoSettingActive = true;
-            this.numericUpDown_proj_dividend.Value = (decimal)(minAverage * sharePrice);
+            this.numericUpDown_proj_dividend.Value = (decimal)(this.SelectedDivPerDollarValue * sharePrice);
             this.numericUpDown_proj_shareprice.Value = (decimal) sharePrice;
             this.numericUpDown_proj_volume.Value = (int)Math.Floor(this.numericUpDown_proj_initialInvestment.Value / (decimal)sharePrice);
             this.bAutoSettingActive = false;
+        }
+
+        private void HandleSelectedDividendMode(decimal _sharePrice)
+        {
+            switch (this.SelectedDividendMode)
+            {
+                case "low":
+                {
+                    this.SelectedDivPerDollarValue = this.LowestWeeklyDivPerDollar;
+                    break;
+                }
+                case "avg":
+                {
+                    this.SelectedDivPerDollarValue = this.MinAverageDivPerDollar;
+                    break;
+                }
+            }
+
+            this.numericUpDown_proj_dividend.Value = (decimal)this.SelectedDivPerDollarValue * _sharePrice;
         }
 
         private void numericUpDown_proj_initialInvestment_ValueChanged(object sender, EventArgs e)
@@ -892,5 +928,13 @@ namespace MDR_YieldmaxTools
         }
 
         #endregion
+
+        private void radRadioButton_proj_dividend_low_avg_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            RadRadioButton rrButton = (RadRadioButton)sender;
+            if (rrButton == null) return;
+            this.SelectedDividendMode = rrButton.Tag.ToString();
+            this.HandleSelectedDividendMode((decimal)this.numericUpDown_proj_shareprice.Value);
+        }
     }
 }
